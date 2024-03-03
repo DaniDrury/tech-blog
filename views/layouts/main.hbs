@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="flex-column justify-content-around">
+  <div class="vh-100 flex-column">
     <header class="flex-column justify-content-between align-items-center p-2">
       <nav>
           <a href="/">Home</a></li>
@@ -26,12 +26,12 @@
         <a href="/">Dani's Tech Blog</a>
       </h1>
     </header>
-    <main class="container container-fluid mt-5">
+    <main class="container container-fluid mt-5 vh-75 overflow-auto ">
       <!-- Render the sub layout -->
       {{{ body }}}
     </main>
-    <footer>
-      <h4>&copy DND Web Dev 2024</h4>
+    <footer class="py-2">
+      <h6 class="text-center">&copy DND Web Dev 2024</h6>
     </footer>
   </div>
 

@@ -1,19 +1,18 @@
 {{#each posts as |post| }}
-<div class="row mb-4 project">
-  <div class="col-md-5">
+<div class="card">
+  <div data-id="{{post.id}}" class="card-header d-flex justify-content-between">
+    {{!-- d-flex justify-content-between --}}
     <h2>
-      <a href="/post/{{post.id}}">{{post.name}}</a>
+    {{!-- class="d-inline" --}}
+      {{post.name}}
     </h2>
+    <p class="pt-2">Posted by {{post.user.name}} on {{format_date post.createdAt}}</p>
+    {{!-- class="d-inline" --}}
   </div>
-  <div class="flex">
-    <div>
+  <div class="card-body">
       <p>
         {{post.body}}
       </p>
-    </div>
-    <div>
-      <p>From: {{post.user.name}} Created on: {{format_date post.createdAt}}</p>
-    </div>
   </div>
 </div>
 {{/each}}
