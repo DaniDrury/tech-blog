@@ -11,6 +11,9 @@ router.get('/', async (req, res) => {
         attributes: ['name'],
       },
     ],
+    order: [
+      ['createdAt', 'ASC'],
+    ],
   });
 
   if (!postData) {
@@ -20,9 +23,21 @@ router.get('/', async (req, res) => {
 // serialize data so the template can read it
   const posts = postData.map((post) => post.get({ plain: true }));
 
-  console.log(posts);
 // pass data and session flag into tempate
   res.render('homepage', { posts, logged_in: req.session.logged_in });
+});
+
+router.get('/dashboard', withAuth, async (req, res) => {
+  console.log('You are logged in.');
+});
+
+router.get('/login', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/dashboard');
+    return;
+  }
+
+  res.render('login');
 });
 
 module.exports = router;
