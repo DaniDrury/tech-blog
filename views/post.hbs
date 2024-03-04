@@ -14,8 +14,7 @@
   </div>
   <div>
     {{#each post.comments as |comment| }}
-
-    <div class="card mb-2 border-3 rounded-3 border-secondary">
+    <div class="card mb-2 border-3 rounded-3 border-secondary w-75">
       <div data-id="{{comment.id}}" class="card-header d-flex justify-content-between bg-info"></div>
       <div class="card-body">
         <p>{{comment.body}}</p>
@@ -26,8 +25,8 @@
   </div>
   <div>
     <form id="comment-form">
-      <input type="text" id="commentInput" />
-      <button id="commentBtn">Submit Comment</button>
+      <textarea id="commentInput" placeholder="Type your comment here" rows="4" cols="100"></textarea>
+      <button id="commentBtn" class="d-block bg-info fw-bold">Submit Comment</button>
     </form>
   </div>
 </div>

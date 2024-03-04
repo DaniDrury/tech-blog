@@ -26,10 +26,6 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', withAuth, async (req, res) => {
   const id = req.params.id;
 
-  // console.log('/n ------------------------ /n');
-  // console.log(req.body);
-  // console.log('/n ------------------------ /n');
-
   const postData = await Post.findByPk(id, {
     include: [
       {
@@ -38,7 +34,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
       },
       {
         model: Comment,
-      }
+      },
     ],
   });
 
@@ -52,14 +48,7 @@ router.get('/post/:id', withAuth, async (req, res) => {
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {
-  
-
-
-  console.log('/n ------------------------ /n');
-  console.log(req.body);
-  console.log('/n ------------------------ /n');
-  
-  // sequelize get expression - findAll blog posts
+  // sequelize get expression - findAll blog posts where user_id matches logged_in user_id
   const postData = await Post.findAll({
     where: { user_id: req.session.user_id },
     include: [
@@ -76,7 +65,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   // serialize data so the template can read it
   const posts = postData.map((post) => post.get({ plain: true }));
 
-// pass data and session flag into tempate
+  // pass data and session flag into tempate
   res.render('homepage', { posts, logged_in: req.session.logged_in });
 });
 
