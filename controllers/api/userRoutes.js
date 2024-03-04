@@ -1,18 +1,22 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
   const userData = await User.create(req.body);
+
+  console.log('\n -------------------- \n');
+  console.log(userData);
+  console.log('\n -------------------- \n');
 
   if (!userData) {
     throw new Error('Could not create new user');
   };
 
   req.session.save(() => {
-    req.session.user_id = userData.isSoftDeleted;
+    req.session.user_id = userData.id;
     req.session.logged_in = true;
 
-    res.status(200).json(userData);
+    res.status(200).json({ user: userData, message: "You've created an account and are logged in!" });
   });
 });
 
@@ -23,7 +27,7 @@ router.post('/login', async (req, res) =>{
     throw new Error('Could not find this user');
   }
 
-  const validPassword = await userData.checkPassword(req.body.password);
+  const validPassword = userData.checkPassword(req.body.password);
 
   if (!validPassword) {
     throw new Error('Incorrect email or password, please try again');
