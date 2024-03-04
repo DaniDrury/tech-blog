@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -21,6 +21,35 @@ router.get('/', async (req, res) => {
 
 // pass data and session flag into tempate
   res.render('homepage', { posts, logged_in: req.session.logged_in });
+});
+
+router.get('/post/:id', withAuth, async (req, res) => {
+  const id = req.params.id;
+
+  console.log('/n ------------------------ /n');
+  console.log(req.body);
+  console.log('/n ------------------------ /n');
+
+  const postData = await Post.findByPk(id, {
+    include: [
+      {
+        model: User,
+        attributes: ['name'],
+      },
+      {
+        model: Comment,
+      }
+    ],
+  });
+
+  const post = postData.get({ plain: true });
+
+  console.log('/n ------------------------ /n');
+  console.log(post);
+  console.log('/n ------------------------ /n');
+
+  res.render('post', { post, logged_in: req.session.logged_in });
+  // const postData = await Post.findByPk();
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {

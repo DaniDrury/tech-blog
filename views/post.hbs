@@ -1,0 +1,35 @@
+<div>
+  <div class="card mb-2 border-3 rounded-3 border-secondary">
+    <div data-id="{{post.id}}" class="card-header d-flex justify-content-between bg-info">
+      <h2>
+        {{post.name}}
+      </h2>
+      <p class="pt-2">Posted by {{post.user.name}} on {{format_date post.createdAt}}</p>
+    </div>
+    <div class="card-body">
+      <p>
+        {{post.body}}
+      </p>
+    </div>
+  </div>
+  <div>
+    {{#each post.comments as |comment| }}
+
+    <div class="card mb-2 border-3 rounded-3 border-secondary">
+      <div data-id="{{comment.id}}" class="card-header d-flex justify-content-between bg-info"></div>
+      <div class="card-body">
+        <p>{{comment.body}}</p>
+        <p>- {{comment.name}}, {{format_date comment.createdAt}} </p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <div>
+    <form id="comment-form">
+      <input type="text" id="commentInput" />
+      <button id="commentBtn">Submit Comment</button>
+    </form>
+  </div>
+</div>
+
+<script src="./js/post.js"></script>
