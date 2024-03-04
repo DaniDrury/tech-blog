@@ -24,11 +24,11 @@
     {{/each}}
   </div>
   <div>
-    <form id="comment-form">
+    <form id="comment-form" data-id="{{post.id}}">
       <textarea id="commentInput" placeholder="Type your comment here" rows="4" cols="100"></textarea>
       <button id="commentBtn" class="d-block bg-info fw-bold">Submit Comment</button>
     </form>
   </div>
 </div>
 
-<script src="./js/post.js"></script>
+<script src="../js/comment.js"></script>
