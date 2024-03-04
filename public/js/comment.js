@@ -13,10 +13,13 @@ const commentFormHandler = async (event) => {
 
   // refreshes the page, showing newly added comment, if response OK
   if (response.ok) {
-    document.location.replace(`/post/${post_id}`);
+    if (response.redirected) {
+      return document.location.replace(response.url);
+    }
+    document.location.reload();
   } else {
     alert(response.statusText);
-  }
+  };
 };
 
 document.querySelector('#comment-form').addEventListener('submit', commentFormHandler);
