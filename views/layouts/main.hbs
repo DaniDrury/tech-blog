@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <div class="vh-100 flex-column bg-light">
+  <div class="vh-100 d-flex flex-column bg-light">
     <header class="flex-column justify-content-between align-items-center py-2 px-5 bg-info">
       <nav class="pt-3 pb-2 mx-5 px-5">
         <a href="/" class="fs-5 me-5 text-dark fw-bolder">Home</a></li>
@@ -30,11 +30,11 @@
         </h1>
       </div>
     </header>
-    <main class="container mt-5 h-75 bg-light ">
+    <main class="container mt-5 bg-light h-auto">
       <!-- Render the sub layout -->
       {{{ body }}}
     </main>
-    <footer class="py-2 fixed-bottom">
+    <footer class="footer mt-auto py-2">
       <h6 class="text-center">&copy DND Web Dev 2024</h6>
     </footer>
   </div>
