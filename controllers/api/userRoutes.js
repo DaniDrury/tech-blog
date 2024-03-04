@@ -13,9 +13,13 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) =>{
-  const userData = await User.findOne({ where: { email: req.body.email }});
+  const userData = await User.findOne({ where: { name: req.body.name }});
 
   const validPassword = userData.checkPassword(req.body.password);
+
+  if (!validPassword) {
+    throw new Error("Username or Password incorrect, please try again");
+  }
 
   req.session.save(() => {
     req.session.user_id = userData.id;
