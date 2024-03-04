@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
   res.render('homepage', { posts, logged_in: req.session.logged_in });
 });
 
-router.get('/post/:id', withAuth, async (req, res) => {
+router.get('/post/:id', async (req, res) => {
   const id = req.params.id;
 
   const postData = await Post.findByPk(id, {
