@@ -26,9 +26,9 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', withAuth, async (req, res) => {
   const id = req.params.id;
 
-  console.log('/n ------------------------ /n');
-  console.log(req.body);
-  console.log('/n ------------------------ /n');
+  // console.log('/n ------------------------ /n');
+  // console.log(req.body);
+  // console.log('/n ------------------------ /n');
 
   const postData = await Post.findByPk(id, {
     include: [
@@ -44,16 +44,40 @@ router.get('/post/:id', withAuth, async (req, res) => {
 
   const post = postData.get({ plain: true });
 
-  console.log('/n ------------------------ /n');
-  console.log(post);
-  console.log('/n ------------------------ /n');
+  // console.log('/n ------------------------ /n');
+  // console.log(post);
+  // console.log('/n ------------------------ /n');
 
   res.render('post', { post, logged_in: req.session.logged_in });
-  // const postData = await Post.findByPk();
 });
 
 router.get('/dashboard', withAuth, async (req, res) => {
-  console.log('You are logged in.');
+  
+
+
+  console.log('/n ------------------------ /n');
+  console.log(req.body);
+  console.log('/n ------------------------ /n');
+  
+  // sequelize get expression - findAll blog posts
+  const postData = await Post.findAll({
+    where: { user_id: req.session.user_id },
+    include: [
+      {
+        model: User,
+        attributes: ['name'],
+      },
+    ],
+    order: [
+      ['createdAt', 'ASC'],
+    ],
+  });
+
+  // serialize data so the template can read it
+  const posts = postData.map((post) => post.get({ plain: true }));
+
+// pass data and session flag into tempate
+  res.render('homepage', { posts, logged_in: req.session.logged_in });
 });
 
 router.get('/login', (req, res) => {
