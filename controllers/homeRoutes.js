@@ -16,10 +16,6 @@ router.get('/', async (req, res) => {
     ],
   });
 
-  if (!postData) {
-    throw new Error('No posts found');
-  }
-
 // serialize data so the template can read it
   const posts = postData.map((post) => post.get({ plain: true }));
 
