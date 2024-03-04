@@ -15,10 +15,10 @@
   <div>
     {{#each post.comments as |comment| }}
     <div class="card mb-2 border-3 rounded-3 border-secondary w-75">
-      <div data-id="{{comment.id}}" class="card-header d-flex justify-content-between bg-info"></div>
+      <div data-id="{{id}}" class="card-header d-flex justify-content-between bg-info"></div>
       <div class="card-body">
-        <p>{{comment.body}}</p>
-        <p>- {{comment.name}}, {{format_date comment.createdAt}} </p>
+        <p>{{body}}</p>
+        <p>- {{user.name}}, {{format_date createdAt}} </p>
       </div>
     </div>
     {{/each}}
