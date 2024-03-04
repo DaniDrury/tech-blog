@@ -11,7 +11,8 @@ const commentFormHandler = async (event) => {
     headers: { 'Content-Type': 'application/json' }
   });
 
-  // refreshes the page, showing newly added comment, if response OK
+  // if withAuth tries to redirect, manually implement that here
+  // otherwise, 200 response reloads page, else show error
   if (response.ok) {
     if (response.redirected) {
       return document.location.replace(response.url);
