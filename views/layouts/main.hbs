@@ -17,7 +17,7 @@
           <a href="/dashboard" class="fs-5 me-5 text-dark fw-bolder">Dashboard</a></li>
         <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
-          <button id="logout" class="fs-5 text-dark fw-bolder">Logout</button>
+          <a href="/" id="logout" class="fs-5 text-dark fw-bolder">Logout</a>
           {{else}}
           <a href="/login" class="fs-5 text-dark fw-bolder">Login</a>
           {{/if}}
