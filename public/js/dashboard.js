@@ -1,16 +1,3 @@
-const postClickHandler = (event) => {
-  event.preventDefault();
-
-  // get post_id from specific "post" div data-id attribute
-  const post_id = event.currentTarget.dataset.id;
-
-  // using window.location.href (versus document.location.replace) allows for 
-  // a more functional and intuitive back button experience
-  if (post_id) {
-    window.location.href = `/post/${post_id}`;
-  }
-};
-
 const newPostBtnHandler = (event) => {
   event.preventDefault();
 
@@ -41,7 +28,5 @@ const newPostFormHandler = async (event) => {
   };
 };
 
-// use ?. chain operator in case specific element doesn't exist on a rendered page
-document.querySelectorAll(".post-card")?.forEach(e => e.addEventListener("click", postClickHandler));
 document.querySelector('#newPostBtn')?.addEventListener("click", newPostBtnHandler);
 document.querySelector('#new-post-form')?.addEventListener("submit", newPostFormHandler);
