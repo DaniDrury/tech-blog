@@ -23,9 +23,14 @@ router.get('/', async (req, res) => {
   res.render('homepage', { posts, logged_in: req.session.logged_in });
 });
 
+router.get('/post/new', withAuth, (req, res) => {
+  res.render('post-form-new');
+});
+
 router.get('/post/:id', async (req, res) => {
   const id = req.params.id;
 
+  // sequelize get expression - find post by primary key / id
   const postData = await Post.findByPk(id, {
     include: [
       {
@@ -34,6 +39,7 @@ router.get('/post/:id', async (req, res) => {
       },
       {
         model: Comment,
+        // include the Comment's user_id name attribute
         include: [
           {
             model: User,
@@ -45,10 +51,6 @@ router.get('/post/:id', async (req, res) => {
   });
 
   const post = postData.get({ plain: true });
-
-  // console.log('/n ------------------------ /n');
-  // console.log(post);
-  // console.log('/n ------------------------ /n');
 
   res.render('post', { post, logged_in: req.session.logged_in });
 });
@@ -72,7 +74,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
   const posts = postData.map((post) => post.get({ plain: true }));
 
   // pass data and session flag into tempate
-  res.render('homepage', { posts, logged_in: req.session.logged_in });
+  res.render('dashboard', { posts, logged_in: req.session.logged_in });
 });
 
 router.get('/login', (req, res) => {
