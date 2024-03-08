@@ -29,8 +29,6 @@ const newPostFormHandler = async (event) => {
 };
 
 const postClickHandler = (event) => {
-  //  Need this to send user to /post/edit where the post-form-edit page is rendered
-  //  need to send post data into form
   event.preventDefault();
 
   const post_id = event.currentTarget.dataset.id;
@@ -38,12 +36,30 @@ const postClickHandler = (event) => {
   return window.location.href = `/dashboard/${post_id}`;
 };
 
-const editPostFormHandler = (event) => {
-  // send fetch PUT request to update post
+const editPostFormHandler = async (event) => {
+  event.preventDefault();
+
+  const id = document.querySelector("#edit-post-form").dataset.id;
+  const name = document.querySelector("#post-name").value.trim();
+  const body = document.querySelector("#post-body").value.trim();
+
+  const response = await fetch(`/api/posts/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify({ name, body }),
+    headers: { 'Content-Type': 'application/json' }
+  });
+
+  if (response.ok) {
+    if (response.redirected) {
+      return document.location.replace(response.url);
+    }
+    window.location.href = '/dashboard';
+  } else {
+    alert(response.statusText);
+  };
 };
 
 const deletePostHandler = async (event) => {
-  //  from the post-form-edit page, delete the post
   event.preventDefault();
 
   const id = event.currentTarget.dataset.id;

@@ -10,14 +10,13 @@ router.post('/', withAuth, async (req, res) => {
   res.status(200).json(postData);
 });
 
-router.patch('/:id', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
   const post_id = req.params.id;
   const user_id = req.session.user_id;
-  // const { name, body } = req.body;
   const postData = { ...req.body, user_id };
 
   const updatedPost = await Post.update(postData, {
-    where: { post_id },
+    where: {id: post_id},
   });
 
   res.status(200).json(updatedPost);
