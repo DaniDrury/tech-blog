@@ -6,14 +6,16 @@
     <div class="card-body">
       <form id="edit-post-form">
         <label for="name" class="fw-bold my-2">Title</label>
-        <input type="text" name="name" id="post-name" class="w-100" value="{{name}}" />
+        <input type="text" name="name" id="post-name" class="w-100" value="{{post.name}}" />
         <label for="body" class="fw-bold my-2">Content</label>
-        <textarea name="body" id="post-body" cols="100" rows="10" class="w-100" value="{{body}}"></textarea>
+        <textarea name="body" id="post-body" cols="100" rows="10" class="w-100">{{post.body}}</textarea>
         <div class="d-flex justify-content-center my-3">
           <button type="submit" class="rounded-pill px-3 py-1 bg-info fw-bold w-50">Update Post</button>
         </div>
       </form>
-      <button class="rounded-pill px-3 py-1 bg-info fw-bold w-50" id="deleteBtn">Delete Post</button>
+      <div class="d-flex justify-content-center my-3">
+        <button class="rounded-pill px-3 py-1 bg-danger fw-bold w-50" id="deleteBtn" data-id="{{post.id}}">Delete Post</button>
+      </div>
     </div>
   </div>
 </div>
